@@ -1,2 +1,485 @@
+为你重新设计并美化了这个网站，在保留原有信息的基础上，增加了现代玻璃态风格、柔和动画，以及一个显眼的友情链接区域。
+
+```html
 <!DOCTYPE html>
-<html> <head> <meta charset="utf-8"> <title>我的网站</title> </head> <body> <h1>Hello World！我的网站上线啦！</h1> </body> </html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>泠风 · 正在搭建我的网站</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #eef5ff 0%, #d9e9fc 100%);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+            position: relative;
+            line-height: 1.4;
+        }
+
+        /* 动态风元素装饰 */
+        .wind-deco {
+            position: fixed;
+            font-size: 3rem;
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatSlow 12s infinite alternate;
+        }
+
+        @keyframes floatSlow {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(30px, -20px) rotate(8deg); }
+        }
+
+        /* 主卡片：现代玻璃态 */
+        .glass-card {
+            max-width: 880px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(2px);
+            border-radius: 2.5rem;
+            box-shadow: 0 30px 50px -20px rgba(0, 32, 54, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.6) inset, 0 0 0 2px rgba(148, 184, 200, 0.2);
+            overflow: hidden;
+            transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.4s;
+            position: relative;
+            z-index: 2;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 40px 60px -20px rgba(20, 60, 70, 0.35);
+        }
+
+        /* 头部渐变 + 微光晕 */
+        .hero {
+            background: linear-gradient(125deg, #1f6d6b 0%, #1f5e5c 35%, #226b6a 100%);
+            padding: 2.8rem 2rem 2.2rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            background: radial-gradient(circle, rgba(255,255,240,0.2) 0%, rgba(255,255,255,0) 70%);
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .avatar {
+            background: rgba(255, 255, 255, 0.2);
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1.2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.6rem;
+            backdrop-filter: blur(8px);
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s;
+        }
+
+        .avatar:hover {
+            transform: scale(1.02);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.4rem;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .name-en {
+            font-size: 1.1rem;
+            font-weight: 400;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.25rem 1rem;
+            border-radius: 60px;
+            display: inline-block;
+            backdrop-filter: blur(2px);
+        }
+
+        .university {
+            margin-top: 1.2rem;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 0.4rem 1.2rem;
+            border-radius: 60px;
+            font-weight: 500;
+            backdrop-filter: blur(2px);
+        }
+
+        /* 主体 */
+        .content {
+            padding: 2rem 2rem 1.8rem;
+        }
+
+        /* 状态卡片 */
+        .status-chip {
+            background: #ebf7fa;
+            border-radius: 60px;
+            padding: 0.6rem 1.2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 600;
+            color: #1f6d6b;
+            margin-bottom: 1.8rem;
+            border: 1px solid #cae3ea;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        .intro-text {
+            background: #f9fffe;
+            padding: 1.2rem 1.4rem;
+            border-radius: 1.8rem;
+            margin-bottom: 2rem;
+            border-left: 5px solid #2c8b88;
+            font-size: 1rem;
+            line-height: 1.55;
+            color: #1c4e50;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+
+        /* 学习进度模块 */
+        .learning-panel {
+            background: #f2fafc;
+            border-radius: 1.8rem;
+            padding: 1.4rem 1.6rem;
+            margin-bottom: 2rem;
+            transition: all 0.2s;
+        }
+
+        .section-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #196e6b;
+            margin-bottom: 1rem;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1rem 0 1.2rem;
+        }
+
+        .tag {
+            background: white;
+            border-radius: 40px;
+            padding: 0.3rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #1f6d6b;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid #cde3ea;
+            transition: all 0.2s;
+        }
+
+        .tag:hover {
+            background: #1f6d6b;
+            color: white;
+            border-color: #1f6d6b;
+            transform: translateY(-2px);
+        }
+
+        .progress-bar-container {
+            background: #e1eef2;
+            border-radius: 30px;
+            height: 8px;
+            width: 100%;
+            margin: 1rem 0 0.6rem;
+        }
+
+        .progress-fill {
+            width: 72%;
+            background: linear-gradient(90deg, #2c8b88, #45b7aa);
+            height: 8px;
+            border-radius: 30px;
+            box-shadow: 0 0 3px #79cdc0;
+        }
+
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: #58878b;
+            margin-bottom: 1rem;
+        }
+
+        .highlight-note {
+            background: #ffffffcc;
+            border-radius: 1rem;
+            padding: 0.8rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            border: 1px solid #cde3ea;
+            margin-top: 1rem;
+        }
+
+        /* 友链专区 - 美化重点 */
+        .friends-section {
+            background: linear-gradient(115deg, #ffffff 0%, #fafeff 100%);
+            border-radius: 1.8rem;
+            padding: 1.3rem 1.6rem;
+            margin: 1.5rem 0 1rem;
+            border: 1px solid #cee5ec;
+            box-shadow: 0 6px 14px rgba(0, 30, 30, 0.05);
+            transition: all 0.2s;
+        }
+
+        .friends-title {
+            font-weight: 700;
+            font-size: 1.15rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #1f6d6b;
+            margin-bottom: 0.8rem;
+        }
+
+        .friends-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .friend-link {
+            background: #ebf3f5;
+            padding: 0.6rem 1.2rem;
+            border-radius: 60px;
+            text-decoration: none;
+            color: #1f6d6b;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s;
+            border: 1px solid #d4e6ed;
+        }
+
+        .friend-link:hover {
+            background: #1f6d6b;
+            color: white;
+            border-color: #1f6d6b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(31, 109, 107, 0.2);
+        }
+
+        .friend-link i {
+            font-style: normal;
+            font-size: 1rem;
+        }
+
+        .friend-badge {
+            font-size: 0.75rem;
+            background: #cbe8ee;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            color: #136462;
+            margin-left: 0.4rem;
+        }
+
+        /* 按钮组 */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            flex: 1;
+            text-align: center;
+            padding: 0.7rem 0.2rem;
+            border-radius: 3rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.2s;
+            font-size: 0.9rem;
+            background: #eff6f8;
+            color: #1f6d6b;
+            border: 1px solid #cde3e8;
+        }
+
+        .btn-primary {
+            background: #1f6d6b;
+            color: white;
+            border: none;
+            box-shadow: 0 4px 10px rgba(31, 109, 107, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: #0e5553;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline:hover {
+            background: #e0f0f3;
+            border-color: #2c8b88;
+        }
+
+        footer {
+            margin-top: 1.8rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #7c9ea3;
+            border-top: 1px solid #d9ecf0;
+            padding-top: 1.2rem;
+        }
+
+        @media (max-width: 600px) {
+            .glass-card {
+                border-radius: 1.6rem;
+            }
+            .hero {
+                padding: 1.8rem 1rem;
+            }
+            .content {
+                padding: 1.5rem;
+            }
+            h1 {
+                font-size: 1.9rem;
+            }
+            .avatar {
+                width: 80px;
+                height: 80px;
+                font-size: 2.8rem;
+            }
+            .friends-list {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .friend-link {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 漂浮风动装饰 -->
+    <div class="wind-deco" style="top: 8%; left: 3%;">🍃</div>
+    <div class="wind-deco" style="bottom: 10%; right: 2%; font-size: 2.5rem; animation-duration: 14s;">🌬️</div>
+    <div class="wind-deco" style="top: 20%; right: 8%; font-size: 2rem; opacity: 0.1; animation-duration: 18s;">💨</div>
+
+    <div class="glass-card">
+        <div class="hero">
+            <div class="avatar">
+                🌊
+            </div>
+            <h1>泠风</h1>
+            <div class="name-en">Chilly wind</div>
+            <div class="university">
+                🎓 江苏科技大学 · 探索代码与云端
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- 状态徽章 -->
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                <div class="status-chip">
+                    <span>⚡</span> 目前正在 · 搭建我的网站 · 进度持续刷新
+                </div>
+            </div>
+
+            <!-- 介绍 突出个人 -->
+            <div class="intro-text">
+                ✨ 嗨，我是泠风 (Chilly wind) ，来自江苏科技大学。<br>
+                从零开始学习网站搭建，享受代码从本地走向互联网的过程。  
+                这个站点是我学习旅程的第一块里程碑，未来会越来越有趣 🚀
+            </div>
+
+            <!-- 学习进度模块 -->
+            <div class="learning-panel">
+                <div class="section-title">
+                    📖 网站搭建技能树
+                </div>
+                <div class="tech-tags">
+                    <span class="tag">HTML5 / CSS3</span>
+                    <span class="tag">Git & GitHub</span>
+                    <span class="tag">Cloudflare Pages</span>
+                    <span class="tag">响应式布局</span>
+                    <span class="tag">域名/DNS 解析</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-labels">
+                    <span>📄 静态页面 ✅</span>
+                    <span>🌐 自动部署 ✅</span>
+                    <span>🎨 交互动效 🔄</span>
+                    <span>✨ 友链添加 ✅</span>
+                </div>
+                <div class="highlight-note">
+                    <span style="font-weight: 500;">🎯 正在学习：现代前端动画 + 后端初步概念</span>
+                    <span style="font-size: 0.75rem; background: #cbe8ee; padding: 0.2rem 0.8rem; border-radius: 40px;">Cloudflare Workers 待探索</span>
+                </div>
+            </div>
+
+            <!-- 友情链接专区：按要求加入 stellaastra.dpdns.org -->
+            <div class="friends-section">
+                <div class="friends-title">
+                    🔗 友情链接 · 一起进步
+                </div>
+                <div class="friends-list">
+                    <!-- 主要友链：stellaastra.dpdns.org 美化展示 -->
+                    <a href="https://stellaastra.dpdns.org" target="_blank" rel="noopener noreferrer" class="friend-link">
+                        <span>✨</span> Stella Astra
+                        <span class="friend-badge">友邻</span>
+                    </a>
+                    <!-- 额外预留一个位置，可方便未来扩展 -->
+                    <a href="#" style="pointer-events: none; cursor: default; opacity: 0.7;" class="friend-link">
+                        <span>🌱</span> 你的站点·筹备中
+                    </a>
+                </div>
+                <p style="font-size: 0.7rem; margin-top: 0.8rem; color: #67999e;">欢迎交换友链，共同见证站点成长~</p>
+            </div>
+
+            <!-- 操作区域 -->
+            <div class="action-buttons">
+                <a href="#" class="btn btn-primary" style="pointer-events: none; cursor: default;">📁 学习仓库</a>
+                <a href="#" class="btn btn-outline" style="pointer-events: none; cursor: default;">📝 笔记周报</a>
+                <a href="https://stellaastra.dpdns.org" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="background:#f0f8fa;">⭐ 访问友链站点</a>
+            </div>
+
+            <footer>
+                🍃 泠风 · 江苏科技大学 · 持续折腾中 <br>
+                本站由 <strong>Cloudflare Pages + GitHub</strong> 驱动 | 友链：<strong>stellaastra.dpdns.org</strong> 🌟
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
+```
